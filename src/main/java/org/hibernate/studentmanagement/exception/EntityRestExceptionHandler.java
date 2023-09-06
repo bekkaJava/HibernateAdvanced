@@ -1,9 +1,10 @@
 package org.hibernate.studentmanagement.exception;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 public class EntityRestExceptionHandler {
@@ -13,77 +14,75 @@ public class EntityRestExceptionHandler {
     public ResponseEntity<EntityErrorResponse> instructorNotFound(InstructorNotFoundException e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
-                                            e.getMessage(),
-                                            HttpStatus.NOT_FOUND,
-                                            System.currentTimeMillis());
+                e.getMessage(),
+                NOT_FOUND,
+                System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, NOT_FOUND);
 
     }
 
 
-
     @ExceptionHandler(CourseNotFoundException.class)
-    public ResponseEntity<EntityErrorResponse> instructorNotFound(CourseNotFoundException e) {
+    public ResponseEntity<EntityErrorResponse> courseNotFound(CourseNotFoundException e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
                 e.getMessage(),
-                HttpStatus.NOT_FOUND,
+                NOT_FOUND,
                 System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, NOT_FOUND);
 
     }
 
     @ExceptionHandler(StudentNotFoundException.class)
-    public ResponseEntity<EntityErrorResponse> instructorNotFound(StudentNotFoundException e) {
+    public ResponseEntity<EntityErrorResponse> studentNotFound(StudentNotFoundException e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
                 e.getMessage(),
-                HttpStatus.NOT_FOUND,
+                NOT_FOUND,
                 System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, NOT_FOUND);
 
     }
 
 
     @ExceptionHandler(StudentAlreadyExistsException.class)
-    public ResponseEntity<EntityErrorResponse> instructorNotFound(StudentAlreadyExistsException e) {
+    public ResponseEntity<EntityErrorResponse> studentAlreadyExists(StudentAlreadyExistsException e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
                 e.getMessage(),
-                HttpStatus.BAD_REQUEST,
+                BAD_REQUEST,
                 System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, BAD_REQUEST);
 
     }
-
 
 
     @ExceptionHandler(CourseAlreadyExistsException.class)
-    public ResponseEntity<EntityErrorResponse> instructorNotFound(CourseAlreadyExistsException e) {
+    public ResponseEntity<EntityErrorResponse> courseAlreadyExists(CourseAlreadyExistsException e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
                 e.getMessage(),
-                HttpStatus.BAD_REQUEST,
+                BAD_REQUEST,
                 System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, BAD_REQUEST);
 
     }
 
 
-    @ExceptionHandler({Exception.class, RuntimeException.class})
-    public ResponseEntity<EntityErrorResponse> instructorNotFound(Exception e) {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<EntityErrorResponse> exception(Exception e) {
 
         EntityErrorResponse error = new EntityErrorResponse(
                 e.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR,
+                INTERNAL_SERVER_ERROR,
                 System.currentTimeMillis());
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(error, INTERNAL_SERVER_ERROR);
 
     }
 

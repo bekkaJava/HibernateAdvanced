@@ -45,7 +45,6 @@ public class StudentRestController {
 
 
 
-
     @PostMapping("/")
     public ResponseEntity<Void> addStudent(@RequestBody Student student) {
 
